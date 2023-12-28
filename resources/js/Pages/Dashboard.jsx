@@ -3,6 +3,8 @@ import { Head } from '@inertiajs/react';
 import Split from 'react-split';
 
 export default function Dashboard(props) {
+    const { campanies } = props;
+    
     return (
         <AuthenticatedLayout
             auth={props.auth}
@@ -25,6 +27,11 @@ export default function Dashboard(props) {
             >
                 <div className="p-4">
                     <div>企業一覧</div>
+                    { campanies.map((campany) =>
+                        <div key = {campany.id}>
+                            <h2>{ campany.name }</h2>
+                        </div>
+                    )}
                 </div>
                 
                 
