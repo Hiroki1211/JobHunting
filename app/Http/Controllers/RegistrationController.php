@@ -23,7 +23,7 @@ class RegistrationController extends Controller
         $campanyID = $registrations->campanyID($authID);
         $campanies = $campanies->whereIn('id', $campanyID)->get();
 
-        return Inertia::render('Manager/CampanyHome', ["campanies" => $campanies]);
+        return Inertia::render('Manager/Campany/Home', ["campanies" => $campanies]);
     }
     
 }
