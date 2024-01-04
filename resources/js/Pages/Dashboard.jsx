@@ -1,6 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import Split from 'react-split';
+import React from "react";
 
 export default function Dashboard(props) {
     const { campanies } = props;

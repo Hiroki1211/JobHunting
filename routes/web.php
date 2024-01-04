@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\CampanyController;
 use App\Http\Controllers\RegistrationController;
 
 /*
@@ -37,6 +38,9 @@ Route::middleware('auth')->group(function () {
     
     // campany
     Route::get('/campany', [RegistrationController::class, "campanyHome"])->name('campany');
+    Route::get('/campany/create', [CampanyController::class, "create"]);
+    
+    Route::post('/campany/create', [CampanyController::class, "store"]);
     
 });
 

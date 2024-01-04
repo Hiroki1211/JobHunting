@@ -9,6 +9,12 @@ class Registration extends Model
 {
     use HasFactory;
     
+    protected $fillable = [
+        'userID',
+        'registrateUserID',
+        'campanyID',
+    ];   
+    
     public function registration(int $userID){
         return $this->where('userID', '=', $userID)->get();
     }
