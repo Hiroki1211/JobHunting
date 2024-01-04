@@ -18,4 +18,12 @@ class RegistrationController extends Controller
         return Inertia::render('Dashboard', ["campanies" => $campanies]);
     }
     
+    public function campanyHome(Registration $registrations, Campany $campanies){
+        $authID = Auth::user()->id;
+        $campanyID = $registrations->campanyID($authID);
+        $campanies = $campanies->whereIn('id', $campanyID)->get();
+
+        return Inertia::render('Manager/CampanyHome', ["campanies" => $campanies]);
+    }
+    
 }

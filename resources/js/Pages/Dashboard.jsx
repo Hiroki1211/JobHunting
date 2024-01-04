@@ -26,10 +26,12 @@ export default function Dashboard(props) {
                 gutterStyle={() => ({})}
             >
                 <div className="p-4">
-                    <div>企業一覧</div>
+                    <div className="p-3">企業一覧</div>
                     { campanies.map((campany) =>
-                        <div key = {campany.id}>
-                            <h2>{ campany.name }</h2>
+                        <div key = {campany.id} className="p-3">
+                            <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                                <div className="p-6 text-gray-900">{ campany.name }</div>
+                            </div>
                         </div>
                     )}
                 </div>
