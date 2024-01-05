@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use App\Models\Campany;
 use App\Models\Registration;
-use App\Http\Controllers\RegistrationController;
 
 class CampanyController extends Controller
 {
@@ -28,4 +27,9 @@ class CampanyController extends Controller
         
         return redirect("/campany");
     }
+    
+    public function show(Campany $campany){
+        return Inertia::render('Manager/Campany/Show', ["campany" => $campany]);
+    }
+    
 }
