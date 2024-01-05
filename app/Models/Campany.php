@@ -11,5 +11,7 @@ class Campany extends Model
     
     protected $fillable = [
         'name',
+        'telephone',
+        'email',
     ];
 }

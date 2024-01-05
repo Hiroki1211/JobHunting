@@ -1,5 +1,5 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import React from "react";
 
 export default function Dashboard(props) {
@@ -13,11 +13,18 @@ export default function Dashboard(props) {
         >
             <Head title="Campany" />
                 <div className="p-4">
-                    <div className="p-3">企業一覧</div>
+                    <div className="flex justify-end items-center gap-2">
+                        <Link href="/campany/create">
+                            <button>企業登録</button>
+                        </Link>
+                        <button>企業削除</button>
+                    </div>
                     { campanies.map((campany) =>
-                        <div key = {campany.id} className="p-3">
+                        <div key={campany.id} className="p-3">
                             <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                                <div className="p-6 text-gray-900">{ campany.name }</div>
+                                <div className="p-6 text-gray-900">
+                                    <Link href={`/campany/${campany.id}`}>{ campany.name }</Link>
+                                </div>
                             </div>
                         </div>
                     )}

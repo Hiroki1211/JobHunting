@@ -1,5 +1,5 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import Split from 'react-split';
 import React from "react";
 
@@ -31,7 +31,9 @@ export default function Dashboard(props) {
                     { campanies.map((campany) =>
                         <div key = {campany.id} className="p-3">
                             <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                                <div className="p-6 text-gray-900">{ campany.name }</div>
+                                <div className="p-6 text-gray-900">
+                                    <Link href={`/campany/${campany.id}`}>{ campany.name }</Link>
+                                </div>
                             </div>
                         </div>
                     )}
