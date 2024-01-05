@@ -32,4 +32,17 @@ class CampanyController extends Controller
         return Inertia::render('Manager/Campany/Show', ["campany" => $campany]);
     }
     
+    public function delete(Campany $campany, Registration $registrations){
+        $campanyID = $campany->id;
+        
+        $registrations = $registrations->where('campanyID', '=', $campanyID)->get();
+        foreach($registrations as $registration){
+            $registration->delete();
+        }
+        
+        $campany->delete();
+        
+        return redirect("/campany");
+    }
+    
 }

@@ -42,6 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/campany/{campany}', [CampanyController::class, "show"]);
     
     Route::post('/campany/create', [CampanyController::class, "store"]);
+    Route::delete('/campany/delete/{campany}', [CampanyController::class, "delete"]);
     
 });
 

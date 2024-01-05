@@ -17,7 +17,6 @@ export default function Dashboard(props) {
                         <Link href="/campany/create">
                             <button>企業登録</button>
                         </Link>
-                        <button>企業削除</button>
                     </div>
                     { campanies.map((campany) =>
                         <div key={campany.id} className="p-3">

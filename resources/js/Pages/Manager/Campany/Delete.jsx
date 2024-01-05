@@ -1,15 +1,9 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, Link, router } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import React from "react";
 
 export default function Dashboard(props) {
     const { campany } = props;
-    
-    const handleDeleteCampany = (id) => {
-        router.delete(`/campany/delete/${id}`, {
-            onBefore: () => confirm("本当に削除しますか？"),
-        })
-    }
     
     return (
         <AuthenticatedLayout
@@ -27,7 +21,7 @@ export default function Dashboard(props) {
                         </div>
                     </div>
                     
-                    <button onClick={() => handleDeleteCampany(campany.id)}>削除</button>
+                    <Link href={`/campany/delete/{campany.id}`}>削除</Link>
                 </div>
             
             
