@@ -32,6 +32,16 @@ class CampanyController extends Controller
         return Inertia::render('Manager/Campany/Show', ["campany" => $campany]);
     }
     
+    public function edit(Campany $campany){
+        return Inertia::render('Manager/Campany/Edit', ["campany" => $campany]);
+    }
+    
+    public function update(Campany $campany, Request $request){
+        $input = $request->all();
+        $campany->fill($input)->save();
+        return redirect("/campany/" . $campany->id);
+    }
+    
     public function delete(Campany $campany, Registration $registrations){
         $campanyID = $campany->id;
         
@@ -44,5 +54,6 @@ class CampanyController extends Controller
         
         return redirect("/campany");
     }
+    
     
 }

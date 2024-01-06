@@ -39,9 +39,12 @@ Route::middleware('auth')->group(function () {
     // campany
     Route::get('/campany', [RegistrationController::class, "campanyHome"])->name('campany');
     Route::get('/campany/create', [CampanyController::class, "create"]);
+    Route::get('/campany/edit/{campany}', [CampanyController::class, "edit"]);
+    
     Route::get('/campany/{campany}', [CampanyController::class, "show"]);
     
     Route::post('/campany/create', [CampanyController::class, "store"]);
+    Route::put('/campany/edit/{campany}', [CampanyController::class, "update"]);
     Route::delete('/campany/delete/{campany}', [CampanyController::class, "delete"]);
     
 });

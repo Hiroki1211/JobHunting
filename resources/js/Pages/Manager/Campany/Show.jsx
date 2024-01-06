@@ -27,7 +27,10 @@ export default function Dashboard(props) {
                         </div>
                     </div>
                     
-                    <button onClick={() => handleDeleteCampany(campany.id)}>削除</button>
+                    <div className="flex justify-start items-center gap-2">
+                        <Link href={`/campany/edit/${campany.id}`}>編集</Link>
+                        <button onClick={() => handleDeleteCampany(campany.id)}>削除</button>
+                    </div>
                 </div>
             
             
