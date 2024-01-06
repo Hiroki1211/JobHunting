@@ -13,5 +13,18 @@ class Campany extends Model
         'name',
         'telephone',
         'email',
+        'HP',
+        'workLocation',
+        'contents',
+        'workTime',
+        'flex',
+        'remoteWork',
+        'cloth',
+        'incomeYear',
+        'incomeMonth',
+        'incomeNatural',
+        'fixOverTime',
+        'fixOverTimeHour',
+        'fixOverTimePayment',
     ];
 }
