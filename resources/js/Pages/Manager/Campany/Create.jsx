@@ -118,25 +118,25 @@ export default function Dashboard(props) {
                                         <th scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             就業時間
                                         </th>
-                                        <td class="px-6 py-2"><input type="text" placeholder="東京" onChange={(e) => setData("workTime", e.target.value)}/></td>
+                                        <td class="px-6 py-2"><input type="text" placeholder="10:00~18:00" onChange={(e) => setData("workTime", e.target.value)}/></td>
                                     </tr>
                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                         <th scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             フレックス
                                         </th>
-                                        <td class="px-6 py-2"><input type="text" placeholder="東京" onChange={(e) => setData("flex", e.target.value)}/></td>
+                                        <td class="px-6 py-2"><input type="text" placeholder="有り" onChange={(e) => setData("flex", e.target.value)}/></td>
                                     </tr>
                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                         <th scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             リモートワーク
                                         </th>
-                                        <td class="px-6 py-2"><input type="text" placeholder="東京" onChange={(e) => setData("remoteWork", e.target.value)}/></td>
+                                        <td class="px-6 py-2"><input type="text" placeholder="有り" onChange={(e) => setData("remoteWork", e.target.value)}/></td>
                                     </tr>
                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                         <th scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             服装
                                         </th>
-                                        <td class="px-6 py-2"><input type="text" placeholder="東京" onChange={(e) => setData("cloth", e.target.value)}/></td>
+                                        <td class="px-6 py-2"><input type="text" placeholder="私服" onChange={(e) => setData("cloth", e.target.value)}/></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -155,37 +155,37 @@ export default function Dashboard(props) {
                                         <th scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             年収
                                         </th>
-                                        <td class="px-6 py-2 text-left"><input type="text" placeholder="東京" onChange={(e) => setData("incomeYear", e.target.value)}/></td>
+                                        <td class="px-6 py-2 text-left"><input type="text" placeholder="500万" onChange={(e) => setData("incomeYear", e.target.value)}/></td>
                                     </tr>
                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                         <th scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             月収
                                         </th>
-                                        <td class="px-6 py-2"><input type="text" placeholder="東京" onChange={(e) => setData("incomeMonth", e.target.value)}/></td>
+                                        <td class="px-6 py-2"><input type="text" placeholder="40万" onChange={(e) => setData("incomeMonth", e.target.value)}/></td>
                                     </tr>
                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                         <th scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             基本給
                                         </th>
-                                        <td class="px-6 py-2"><input type="text" placeholder="東京" onChange={(e) => setData("incomeNatural", e.target.value)}/></td>
+                                        <td class="px-6 py-2"><input type="text" placeholder="30万" onChange={(e) => setData("incomeNatural", e.target.value)}/></td>
                                     </tr>
                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                         <th scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             固定残業
                                         </th>
-                                        <td class="px-6 py-2"><input type="text" placeholder="東京" onChange={(e) => setData("fixOverTime", e.target.value)}/></td>
+                                        <td class="px-6 py-2"><input type="text" placeholder="有り" onChange={(e) => setData("fixOverTime", e.target.value)}/></td>
                                     </tr>
                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                         <th scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             固定残業時間
                                         </th>
-                                        <td class="px-6 py-2"><input type="text" placeholder="東京" onChange={(e) => setData("fixOverTimeHour", e.target.value)}/></td>
+                                        <td class="px-6 py-2"><input type="text" placeholder="10時間" onChange={(e) => setData("fixOverTimeHour", e.target.value)}/></td>
                                     </tr>
                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                         <th scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             支給金額
                                         </th>
-                                        <td class="px-6 py-2"><input type="text" placeholder="東京" onChange={(e) => setData("fixOverTimePayment", e.target.value)}/></td>
+                                        <td class="px-6 py-2"><input type="text" placeholder="10万" onChange={(e) => setData("fixOverTimePayment", e.target.value)}/></td>
                                     </tr>
                                 </tbody>
                             </table>
