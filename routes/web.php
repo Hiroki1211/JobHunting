@@ -5,6 +5,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\CampanyController;
+use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\RegistrationController;
 
 /*
@@ -42,11 +43,19 @@ Route::middleware('auth')->group(function () {
     Route::get('/campany/edit/{campany}', [CampanyController::class, "edit"]);
     
     Route::get('/campany/{campany}', [CampanyController::class, "show"]);
-    
     Route::post('/campany/create', [CampanyController::class, "store"]);
     Route::put('/campany/edit/{campany}', [CampanyController::class, "update"]);
     Route::delete('/campany/delete/{campany}', [CampanyController::class, "delete"]);
+   
+    // meeting
+    Route::get('/meeting/create/{campany}', [MeetingController::class, "create"]);
+    Route::get('/meeting/show/{meeting}', [MeetingController::class, "show"]);
+    Route::get('/meeting/edit/{meeting}', [MeetingController::class, "edit"]);
     
+    Route::get('/meeting/{campany}', [MeetingController::class, "meetingHome"]);
+    Route::post('/meeting/create', [MeetingController::class, "store"]);
+    Route::put('/meeting/edit/{meeting}', [MeetingController::class, "update"]);
+    Route::delete('/campany/delete/{campany}', [MeetingController::class, "delete"]);
 });
 
 require __DIR__.'/auth.php';

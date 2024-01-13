@@ -69,6 +69,12 @@ export default function Dashboard(props) {
                                 <button onClick={() => handleDeleteCampany(campany.id)}>削除</button>
                             </div>
                         </div>
+                        
+                        <div className="p-3">
+                            <div className="flex justify-start items-center gap-2">
+                                <Link href={`/meeting/${campany.id}`}>面接・タスク表示</Link>
+                            </div>
+                        </div>
                     </div>
                     
                     <div className="p-4 col-span-3">
@@ -85,7 +91,7 @@ export default function Dashboard(props) {
                                         <th scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             事業内容
                                         </th>
-                                        <td class="px-6 py-2">{ campany.contents }</td>
+                                        <td class="px-6 py-2 whitespace-pre-wrap">{ campany.contents }</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -141,7 +147,7 @@ export default function Dashboard(props) {
                                         <th scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             年収
                                         </th>
-                                        <td class="px-6 py-2 text-left">{ campany.incomeYear }</td>
+                                        <td class="px-6 py-2">{ campany.incomeYear }</td>
                                     </tr>
                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                         <th scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
