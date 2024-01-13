@@ -8,16 +8,16 @@ use Inertia\Inertia;
 
 use App\Models\Campany;
 use App\Models\Meeting;
-use App\Models\MeetingCategory;
+use App\Models\Meeting_category;
 
 class MeetingController extends Controller
 {
     public function meetingHome(Campany $campany, Meeting $meetings){
-        $meetings = $meetings->where('campanyID', '=', $campany->id)->get();
+        $meetings = $meetings->where('campanyID', '=', $campany->id)->with("meeting_category")->get();
         return Inertia::render('Manager/Meeting/Home', ['meetings' => $meetings, 'campany' => $campany]);
     }
     
-    public function create(Campany $campany, MeetingCategory $meetingCategories){
+    public function create(Campany $campany, Meeting_category $meetingCategories){
         return Inertia::render('Manager/Meeting/Create', ['campany' => $campany, 'meetingCategories' => $meetingCategories->get()]);
     }
     

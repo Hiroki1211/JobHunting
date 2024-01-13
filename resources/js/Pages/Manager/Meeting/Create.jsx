@@ -18,7 +18,7 @@ export default function Dashboard(props) {
         memo : "",
         location : "",
         cloth : "",
-        meetingCategoryID : ""
+        meeting_category_id : ""
     })
     
     const handleSendPosts = (e) => {
@@ -38,7 +38,7 @@ export default function Dashboard(props) {
 
                 <div>
                     面接の種類 ：
-                    <select onChange={(e) => setData("meetingCategoryID", e.target.value)}>
+                    <select onChange={(e) => setData("meeting_category_id", e.target.value)}>
                         <option selected disable>種類を選択してください</option>
                         {
                             meetingCategories.map((meetingCategory) => 

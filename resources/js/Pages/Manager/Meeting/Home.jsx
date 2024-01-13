@@ -5,6 +5,8 @@ import React from "react";
 export default function Dashboard(props) {
     const { meetings, campany } = props;
     
+    console.log(meetings);
+    
     return (
         <AuthenticatedLayout
             auth={props.auth}
@@ -24,7 +26,7 @@ export default function Dashboard(props) {
                             <div key={meeting.id} className="p-3">
                                 <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                                     <div className="p-6 text-gray-900">
-                                        <Link href={`/meeting/show/${meeting.id}`}>面接</Link>
+                                        <Link href={`/meeting/show/${meeting.id}`}>{ meeting.meeting_category.name }</Link>
                                     </div>
                                 </div>
                             </div>

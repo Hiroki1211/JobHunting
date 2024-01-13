@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Meeting;
 
-class MeetingCategory extends Model
+class Meeting_category extends Model
 {
     use HasFactory;
     
