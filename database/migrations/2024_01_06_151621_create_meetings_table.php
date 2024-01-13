@@ -25,7 +25,7 @@ return new class extends Migration
             $table->text('location');
             $table->string('cloth', 50);
             $table->timestamps();
-            $table->bigInteger('campanyCategoryID')->unsigned();
+            
         });
     }
 
