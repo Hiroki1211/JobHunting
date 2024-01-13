@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-use App\Model\MeetingCategory;
+use App\Models\Meeting_category;
 
 class Meeting extends Model
 {
@@ -21,10 +21,10 @@ class Meeting extends Model
         'memo',
         'location',
         'cloth',
-        'meetingCategoryID'
+        'meeting_category_id'
     ];
     
-    public function meetingCategory(){
-        return $this->belongsTo(MeetingCategory::class);
+    public function meeting_category(){
+        return $this->belongsTo(Meeting_category::class);
     }
 }
