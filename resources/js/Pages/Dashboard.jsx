@@ -30,9 +30,21 @@ export default function Dashboard(props) {
                 
                 
                 <div className='p-4 col-span-2'>
+                    <div className="max-w-7xl mx-auto pb-3">
+                        <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                            <div className="p-3 text-gray-900">タスク</div>
+                            <div className="p-3 text-gray-900">今日</div>
+                            <div className="p-3 text-gray-900">明日</div>
+                            <div className="p-3 text-gray-900">今週</div>
+                        </div>
+                    </div>
+                    
                     <div className="max-w-7xl mx-auto ">
                         <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                            <div className="p-6 text-gray-900">タスク一覧</div>
+                            <div className="p-3 text-gray-900">面接・面談</div>
+                            <div className="p-3 text-gray-900">今日</div>
+                            <div className="p-3 text-gray-900">明日</div>
+                            <div className="p-3 text-gray-900">今週</div>
                         </div>
                     </div>
                 </div>
