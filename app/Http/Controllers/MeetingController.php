@@ -8,7 +8,7 @@ use Inertia\Inertia;
 
 use App\Models\Campany;
 use App\Models\Meeting;
-use App\Models\CampanyCategory;
+use App\Models\MeetingCategory;
 
 class MeetingController extends Controller
 {
@@ -17,8 +17,8 @@ class MeetingController extends Controller
         return Inertia::render('Manager/Meeting/Home', ['meetings' => $meetings, 'campany' => $campany]);
     }
     
-    public function create(Campany $campany, CampanyCategory $campanyCategories){
-        return Inertia::render('Manager/Meeting/Create', ['campany' => $campany, 'campanyCategories' => $campanyCategories->get()]);
+    public function create(Campany $campany, MeetingCategory $meetingCategories){
+        return Inertia::render('Manager/Meeting/Create', ['campany' => $campany, 'meetingCategories' => $meetingCategories->get()]);
     }
     
     public function store(Request $request, Campany $campany, Meeting $meeting){

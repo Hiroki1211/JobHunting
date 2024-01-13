@@ -6,7 +6,7 @@ import Select from "react-select";
 
 export default function Dashboard(props) {
     
-    const { campany, campanyCategories } = props;
+    const { campany, meetingCategories } = props;
     
     const {data, setData, post} = useForm({
         userID : "",
@@ -18,7 +18,7 @@ export default function Dashboard(props) {
         memo : "",
         location : "",
         cloth : "",
-        campanyCategoryID : ""
+        meetingCategoryID : ""
     })
     
     const handleSendPosts = (e) => {
@@ -38,11 +38,11 @@ export default function Dashboard(props) {
 
                 <div>
                     面接の種類 ：
-                    <select onChange={(e) => setData("campanyCategoryID", e.target.value)}>
+                    <select onChange={(e) => setData("meetingCategoryID", e.target.value)}>
                         <option selected disable>種類を選択してください</option>
                         {
-                            campanyCategories.map((campanyCategory) => 
-                                <option value={campanyCategory.id} key={campanyCategory.id}>{campanyCategory.name}</option>
+                            meetingCategories.map((meetingCategory) => 
+                                <option value={meetingCategory.id} key={meetingCategory.id}>{meetingCategory.name}</option>
                             )
                         }
                     </select>
