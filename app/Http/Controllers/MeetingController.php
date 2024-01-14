@@ -48,4 +48,11 @@ class MeetingController extends Controller
         $meeting->fill($input)->save();
         return redirect('/meeting/' . $meeting->campanyID);
     }
+    
+    public function delete(Meeting $meeting){
+        $campanyID = $meeting->campanyID;
+        $meeting -> delete();
+        
+        return redirect('/meeting/' . $campanyID);
+    }
 }
