@@ -32,4 +32,20 @@ class MeetingController extends Controller
 
         return redirect('/meeting/' . $meeting->campanyID);
     }
+    
+    public function show(Meeting $meeting){
+        return Inertia::render('Manager/Meeting/Show', ['meeting' => $meeting->load('meeting_category')]);
+    }
+    
+    public function edit(Meeting $meeting, Campany $campany, Meeting_category $meetingCategories){
+        $campany = $campany->where("id", "=", $meeting->campanyID)->first();
+        
+        return Inertia::render('Manager/Meeting/Edit', ['meeting' => $meeting, 'campany' => $campany, 'meetingCategories' => $meetingCategories->get()]);
+    }
+    
+    public function update(Meeting $meeting, Request $request){
+        $input = $request->all();
+        $meeting->fill($input)->save();
+        return redirect('/meeting/' . $meeting->campanyID);
+    }
 }

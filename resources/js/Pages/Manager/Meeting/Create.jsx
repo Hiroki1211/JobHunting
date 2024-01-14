@@ -10,7 +10,7 @@ export default function Dashboard(props) {
     
     const {data, setData, post} = useForm({
         userID : "",
-        resistrateUserID : "",
+        registrateUserID : "",
         campanyID : campany.id,
         campanyName : campany.name,
         startDate : "",
