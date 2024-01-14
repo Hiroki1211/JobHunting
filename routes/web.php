@@ -55,7 +55,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/meeting/{campany}', [MeetingController::class, "meetingHome"]);
     Route::post('/meeting/create', [MeetingController::class, "store"]);
     Route::put('/meeting/edit/{meeting}', [MeetingController::class, "update"]);
-    Route::delete('/campany/delete/{campany}', [MeetingController::class, "delete"]);
+    Route::delete('/meeting/delete/{meeting}', [MeetingController::class, "delete"]);
 });
 
 require __DIR__.'/auth.php';
