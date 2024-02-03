@@ -9,12 +9,14 @@ use Inertia\Inertia;
 use App\Models\Campany;
 use App\Models\Meeting;
 use App\Models\Meeting_category;
+use App\Models\Task;
 
 class MeetingController extends Controller
 {
-    public function meetingHome(Campany $campany, Meeting $meetings){
+    public function meetingHome(Campany $campany, Meeting $meetings, Task $tasks){
         $meetings = $meetings->where('campanyID', '=', $campany->id)->with("meeting_category")->get();
-        return Inertia::render('Manager/Meeting/Home', ['meetings' => $meetings, 'campany' => $campany]);
+        $tasks = $tasks->where('campanyID', '=', $campany->id)->where('state', '!=', 'finish')->with("task_category")->get();
+        return Inertia::render('Manager/Meeting/Home', ['meetings' => $meetings, 'campany' => $campany, 'tasks' => $tasks]);
     }
     
     public function create(Campany $campany, Meeting_category $meetingCategories){
