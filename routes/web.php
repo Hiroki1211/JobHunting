@@ -7,6 +7,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\CampanyController;
 use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,6 +57,15 @@ Route::middleware('auth')->group(function () {
     Route::post('/meeting/create', [MeetingController::class, "store"]);
     Route::put('/meeting/edit/{meeting}', [MeetingController::class, "update"]);
     Route::delete('/meeting/delete/{meeting}', [MeetingController::class, "delete"]);
+    
+    // task
+    Route::get('/task/create/{campany}', [TaskController::class, "create"]);
+    Route::get('/task/show/{task}', [TaskController::class, "show"]);
+    Route::get('/task/edit/{task}', [TaskController::class, "edit"]);
+    
+    Route::post('/task/create', [TaskController::class, "store"]);
+    Route::put('/task/edit/{task}', [TaskController::class, "update"]);
+    Route::delete('/task/delete/{task}', [TaskController::class, "delete"]);
 });
 
 require __DIR__.'/auth.php';

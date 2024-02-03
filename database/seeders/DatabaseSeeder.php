@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
         // ]);
         
         $this->call(MeetingCategorySeeder::class);
+        $this->call(TaskCategorySeeder::class);
     }
 }
