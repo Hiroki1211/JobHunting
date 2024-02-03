@@ -33,20 +33,22 @@ export default function Dashboard(props) {
                         )}
                     </div>
                     <div>
-                        <div className="p-2">
-                            <Link href={`/task/create/${campany.id}`}>
-                                <button>タスク登録</button>
-                            </Link>
-                        </div>
-                        { tasks.map((task) =>
-                            <div key={task.id} className="p-3">
-                                <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                                    <div className="p-6 text-gray-900">
-                                        <Link href={`/task/show/${task.id}`}>{ task.task_category.name }</Link>
+                        <div className="p-4">
+                            <div className="p-2">
+                                <Link href={`/task/create/${campany.id}`}>
+                                    <button>タスク登録</button>
+                                </Link>
+                            </div>
+                            { tasks.map((task) =>
+                                <div key={task.id} className="p-3">
+                                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                                        <div className="p-6 text-gray-900">
+                                            <Link href={`/task/show/${task.id}`}>{ task.task_category.name }</Link>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        )}
+                            )}
+                        </div>
                     </div>
                 </div>
         </AuthenticatedLayout>
