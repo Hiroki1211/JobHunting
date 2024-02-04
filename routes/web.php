@@ -49,16 +49,18 @@ Route::middleware('auth')->group(function () {
     Route::delete('/campany/delete/{campany}', [CampanyController::class, "delete"]);
    
     // meeting
+    Route::get('/meeting', [MeetingController::class, "index"]);
     Route::get('/meeting/create/{campany}', [MeetingController::class, "create"]);
     Route::get('/meeting/show/{meeting}', [MeetingController::class, "show"]);
     Route::get('/meeting/edit/{meeting}', [MeetingController::class, "edit"]);
     
-    Route::get('/meeting/{campany}', [MeetingController::class, "meetingHome"]);
+    Route::get('/meeting/{campany}', [CampanyController::class, "meetingTaskHome"]);
     Route::post('/meeting/create', [MeetingController::class, "store"]);
     Route::put('/meeting/edit/{meeting}', [MeetingController::class, "update"]);
     Route::delete('/meeting/delete/{meeting}', [MeetingController::class, "delete"]);
     
     // task
+    Route::get('/task', [TaskController::class, "index"]);
     Route::get('/task/create/{campany}', [TaskController::class, "create"]);
     Route::get('/task/show/{task}', [TaskController::class, "show"]);
     Route::get('/task/edit/{task}', [TaskController::class, "edit"]);
