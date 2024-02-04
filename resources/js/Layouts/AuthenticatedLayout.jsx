@@ -30,7 +30,19 @@ export default function Authenticated({ auth, header, children }) {
                                 <NavLink href={"/campany"} active={route().current('/campany')}>
                                     Campany
                                 </NavLink>
-                            </div>                           
+                            </div>  
+                            
+                            <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <NavLink href={"/meeting"} active={route().current('/meeting')}>
+                                    Meeting
+                                </NavLink>
+                            </div>  
+                            
+                            <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <NavLink href={"/task"} active={route().current('/task')}>
+                                    Task
+                                </NavLink>
+                            </div> 
                         </div>
 
                         <div className="hidden sm:flex sm:items-center sm:ml-6">

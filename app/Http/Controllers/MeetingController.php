@@ -13,10 +13,15 @@ use App\Models\Task;
 
 class MeetingController extends Controller
 {
-    public function meetingHome(Campany $campany, Meeting $meetings, Task $tasks){
-        $meetings = $meetings->where('campanyID', '=', $campany->id)->with("meeting_category")->get();
-        $tasks = $tasks->where('campanyID', '=', $campany->id)->where('state', '!=', 'finish')->with("task_category")->get();
-        return Inertia::render('Manager/Meeting/Home', ['meetings' => $meetings, 'campany' => $campany, 'tasks' => $tasks]);
+    public function index(Meeting $meetings){
+        $authID = Auth::user()->id;
+        
+        $todayMeetings = $meetings->today($authID);
+        $tomorrowMeetings = $meetings->tomorrow($authID);
+        $weekMeetings = $meetings->week($authID);
+        $afterMeetings = $meetings->after($authID);
+        
+        return Inertia::render('Manager/Meeting/Home', ['todayMeetings' => $todayMeetings->load('meeting_category'), 'tomorrowMeetings' => $tomorrowMeetings->load('meeting_category'), 'weekMeetings' => $weekMeetings->load('meeting_category'), 'afterMeetings' => $afterMeetings->load('meeting_category')]);
     }
     
     public function create(Campany $campany, Meeting_category $meetingCategories){

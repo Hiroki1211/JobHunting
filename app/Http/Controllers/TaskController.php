@@ -12,6 +12,17 @@ use App\Models\Task_category;
 
 class TaskController extends Controller
 {
+    public function index(Task $tasks){
+        $authID = Auth::user()->id;
+        
+        $todayTasks = $tasks->today($authID);
+        $tomorrowTasks = $tasks->tomorrow($authID);
+        $weekTasks = $tasks->week($authID);
+        $afterTasks = $tasks->after($authID);
+        
+        return Inertia::render('Manager/Task/Home', ['todayTasks' => $todayTasks->load('task_category'), 'tomorrowTasks' => $tomorrowTasks->load('task_category'), 'weekTasks' => $weekTasks->load('task_category'), 'afterTasks' => $afterTasks->load('task_category')]);
+    }
+    
     public function create(Campany $campany, Task_category $taskCategories){
 
         return Inertia::render('Manager/Task/Create', ['campany' => $campany, 'taskCategories' => $taskCategories->get()]);

@@ -3,22 +3,22 @@ import { Head, Link } from '@inertiajs/react';
 import React from "react";
 
 export default function Dashboard(props) {
-    const { todayMeetings, tomorrowMeetings, weekMeetings, afterMeetings } = props;
+    const { todayTasks, tomorrowTasks, weekTasks, afterTasks } = props;
     
     return (
         <AuthenticatedLayout
             auth={props.auth}
             errors={props.errors}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Meeting</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Task</h2>}
         >
-            <Head title="Meeting" />
+            <Head title="Task" />
                 <div className="p-4">
                     今日
-                    { todayMeetings.map((todayMeeting) =>
-                        <div key={todayMeeting.id} className="p-3">
+                    { todayTasks.map((todayTask) =>
+                        <div key={todayTask.id} className="p-3">
                             <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                                 <div className="p-6 text-gray-900">
-                                    { todayMeeting.meeting_category.name }( { todayMeeting.campanyName } )
+                                    { todayTask.task_category.name }( { todayTask.campanyName } )
                                 </div>
                             </div>
                         </div>
@@ -26,11 +26,11 @@ export default function Dashboard(props) {
                 </div>
                 <div className="p-4">
                     明日
-                    { tomorrowMeetings.map((tomorrowMeeting) =>
-                        <div key={tomorrowMeeting.id} className="p-3">
+                    { tomorrowTasks.map((tomorrowTask) =>
+                        <div key={tomorrowTask.id} className="p-3">
                             <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                                 <div className="p-6 text-gray-900">
-                                    { tomorrowMeeting.meeting_category.name }( { tomorrowMeeting.campanyName } )
+                                    { tomorrowTask.task_category.name }( { tomorrowTask.campanyName } )
                                 </div>
                             </div>
                         </div>
@@ -38,11 +38,11 @@ export default function Dashboard(props) {
                 </div>
                 <div className="p-4">
                     今週
-                    { weekMeetings.map((weekMeeting) =>
-                        <div key={weekMeeting.id} className="p-3">
+                    { weekTasks.map((weekTask) =>
+                        <div key={weekTask.id} className="p-3">
                             <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                                 <div className="p-6 text-gray-900">
-                                    { weekMeeting.meeting_category.name }( { weekMeeting.campanyName } )
+                                    { weekTask.task_category.name }( { weekTask.campanyName } )
                                 </div>
                             </div>
                         </div>
@@ -50,11 +50,11 @@ export default function Dashboard(props) {
                 </div>
                 <div className="p-4">
                     今後
-                    { afterMeetings.map((afterMeeting) =>
-                        <div key={afterMeeting.id} className="p-3">
+                    { afterTasks.map((afterTask) =>
+                        <div key={afterTask.id} className="p-3">
                             <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                                 <div className="p-6 text-gray-900">
-                                    { afterMeeting.meeting_category.name }( { afterMeeting.campanyName } )
+                                    { afterTask.task_category.name }( { afterTask.campanyName } )
                                 </div>
                             </div>
                         </div>
