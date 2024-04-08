@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use App\Models\Campany;
+use App\Models\Campany_category;
 use App\Models\Registration;
 use App\Models\Meeting;
 use App\Models\Task;
@@ -18,8 +19,9 @@ class CampanyController extends Controller
         return Inertia::render('Manager/Campany/MeetingTask', ['meetings' => $meetings, 'campany' => $campany, 'tasks' => $tasks]);
     }
     
-    public function create(){
-        return Inertia::render('Manager/Campany/Create');
+    public function create(Campany_category $categories){
+        $categories = $categories->get();
+        return Inertia::render('Manager/Campany/Create', ['categories' => $categories]);
     }
     
     public function store(Campany $campany, Registration $registration, Request $request, RegistrationController $contoroller){
@@ -37,11 +39,11 @@ class CampanyController extends Controller
     }
     
     public function show(Campany $campany){
-        return Inertia::render('Manager/Campany/Show', ["campany" => $campany]);
+        return Inertia::render('Manager/Campany/Show', ["campany" => $campany->load('campany_category')]);
     }
     
-    public function edit(Campany $campany){
-        return Inertia::render('Manager/Campany/Edit', ["campany" => $campany]);
+    public function edit(Campany $campany, Campany_category $categories){
+        return Inertia::render('Manager/Campany/Edit', ["campany" => $campany->load('campany_category'), "categories" => $categories->get()]);
     }
     
     public function update(Campany $campany, Request $request){
