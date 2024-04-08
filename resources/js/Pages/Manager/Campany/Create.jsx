@@ -21,8 +21,11 @@ export default function Dashboard(props) {
         incomeNatural : "",
         fixOverTime : "",
         fixOverTimeHour : "",
-        fixOverTimePayment : ""
+        fixOverTimePayment : "",
+        campany_category_id : ""
     })
+    
+    const { categories } = props;
     
     const handleSendPosts = (e) => {
         e.preventDefault();
@@ -49,7 +52,7 @@ export default function Dashboard(props) {
                                         <th scope="col" class="px-6 py-2"></th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="text-gray-900">
                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                         <th scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             企業名
@@ -83,37 +86,67 @@ export default function Dashboard(props) {
                                 </tbody>
                             </table>
                         </div>
+                        
+                        <div class="relative overflow-x-auto pb-3">
+                            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-2">職種</th>
+                                        <th scope="col" class="px-6 py-2"></th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-gray-900">
+                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                        <th scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            職種名
+                                        </th>
+                                        <td class="px-6 py-2 text-left">
+                                            <div>
+                                                <select onChange={(e) => setData("campany_category_id", e.target.value)}>
+                                                    <option selected disable>種類を選択してください</option>
+                                                    { categories.map((category) =>
+                                                        <option value = { category.id } key = {category.id}>{ category.name }</option>
+                                                    )}
+                                                 </select>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <button type="submit">作成</button>
                     </div>
                     
                     <div className="p-4 col-span-3">
                         <div class="relative overflow-x-auto pb-3">
-                            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                            <table class="w-full text-sm text-left rtl:text-right">
                                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                     <tr>
                                         <th scope="col" class="px-6 py-2">事業内容</th>
                                         <th scope="col" class="px-6 py-2"></th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="text-black">
                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                         <th scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             事業内容
                                         </th>
-                                        <td class="px-6 py-2"><textarea placeholder="事業内容を記述" onChange={(e) => setData("contents", e.target.value)}></textarea></td>
+                                        <td class="px-6 py-2 text-black"><textarea class="text-black" placeholder="事業内容を記述" onChange={(e) => setData("contents", e.target.value)}></textarea></td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                         
                         <div class="relative overflow-x-auto pb-3">
-                            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                            <table class="w-full text-sm text-left rtl:text-right">
                                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                     <tr>
                                         <th scope="col" class="px-6 py-2">環境</th>
                                         <th scope="col" class="px-6 py-2"></th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="text-gray-900">
                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                         <th scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             就業時間
@@ -150,7 +183,7 @@ export default function Dashboard(props) {
                                         <th scope="col" class="px-6 py-2"></th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="text-gray-900">
                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                         <th scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             年収
@@ -192,8 +225,6 @@ export default function Dashboard(props) {
                         </div>
                     </div>
                 </div>            
-                
-                <button type="submit">作成</button>
             </form>
             
         </AuthenticatedLayout>

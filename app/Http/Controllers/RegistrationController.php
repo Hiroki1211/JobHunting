@@ -25,7 +25,7 @@ class RegistrationController extends Controller
         $tomorrowMeetings = $meetings->tomorrow($authID);
         $weekMeetings = $meetings->week($authID);
         
-        return Inertia::render('Dashboard', ["campanies" => $campanies, "todayTasks" => $todayTasks->load('task_category'), "tomorrowTasks" => $tomorrowTasks->load('task_category'), "weekTasks" => $weekTasks->load('task_category'), "todayMeetings" => $todayMeetings->load('meeting_category'), "tomorrowMeetings" => $tomorrowMeetings->load('meeting_category'), "weekMeetings" => $weekMeetings->load('meeting_category')]);
+        return Inertia::render('Dashboard', ["campanies" => $campanies->load('campany_category'), "todayTasks" => $todayTasks->load('task_category'), "tomorrowTasks" => $tomorrowTasks->load('task_category'), "weekTasks" => $weekTasks->load('task_category'), "todayMeetings" => $todayMeetings->load('meeting_category'), "tomorrowMeetings" => $tomorrowMeetings->load('meeting_category'), "weekMeetings" => $weekMeetings->load('meeting_category')]);
     }
     
     public function campanyHome(Registration $registrations, Campany $campanies){
@@ -33,7 +33,7 @@ class RegistrationController extends Controller
         $campanyID = $registrations->campanyID($authID);
         $campanies = $campanies->whereIn('id', $campanyID)->get();
 
-        return Inertia::render('Manager/Campany/Home', ["campanies" => $campanies]);
+        return Inertia::render('Manager/Campany/Home', ["campanies" => $campanies->load('campany_category')]);
     }
     
 }

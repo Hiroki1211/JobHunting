@@ -26,5 +26,10 @@ class Campany extends Model
         'fixOverTime',
         'fixOverTimeHour',
         'fixOverTimePayment',
+        'campany_category_id',
     ];
+    
+    public function campany_category(){
+        return $this->belongsTo(Campany_category::class);
+    }
 }
