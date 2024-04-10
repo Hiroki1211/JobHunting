@@ -120,7 +120,7 @@ export default function Dashboard(props) {
                                 </div>
                             </div>
                             
-<div className="p-2">
+                            <div className="p-2">
                                 <div class="relative overflow-x-auto border border-gray-400">
                                     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 divide-y divide-gray-400">
                                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

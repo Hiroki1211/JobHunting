@@ -1,13 +1,24 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
 import Split from 'react-split';
-import React from "react";
+import {React, useState} from "react";
 
 export default function Dashboard(props) {
-    const { campanies, todayTasks, tomorrowTasks, weekTasks, todayMeetings, tomorrowMeetings, weekMeetings } = props;
+    const { campanies, todayTasks, tomorrowTasks, weekTasks, todayMeetings, tomorrowMeetings, weekMeetings, campany_categories } = props;
+    
+    const [ showCampanies, setShowCampanies ] = useState(campanies);
+    
+    const selectCampanyCategory = (props) => {
+        if(props == "all"){
+            setShowCampanies(campanies);
+        }else{
+            console.log(props);
+            const selectedCampanies = campanies.filter( (campany) => campany.campany_category_id == props );
+            setShowCampanies(selectedCampanies)
+        }
+    }
     
     const colors = (props) => {
-        console.log(props);
         switch(props.campany_category.color){
             case 'red':
                 return(
@@ -71,8 +82,20 @@ export default function Dashboard(props) {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-5">
                     <div className="col-span-3">
-                        <div className="p-3 font-bold">企業一覧</div>
-                        { campanies.map((campany) =>
+                        <div className="p-3 font-bold flex items-center">
+                            <div>    
+                                企業一覧
+                            </div>
+                            <div class="pl-2">
+                                <select onChange={ (e) => selectCampanyCategory(e.target.value) }>
+                                    <option value="all">All</option>
+                                    { campany_categories.map((campany_category) =>
+                                        <option value = { campany_category.id } key = {campany_category.id}>{ campany_category.name }</option>
+                                    )}
+                                </select>
+                            </div>
+                        </div>
+                        { showCampanies.map((campany) =>
                             <div key = {campany.id} className="p-3">
                                 <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg border border-gray-400">
                                     <div className="p-6 text-gray-900 font-normal">
@@ -92,22 +115,22 @@ export default function Dashboard(props) {
                     <div className='p-2 col-span-2'>
                         <div className="max-w-7xl mx-auto pb-3">
                             <div className="bg-white overflow-hidden shadow-sm border border-gray-400">
-                                <div className="p-3 text-gray-900 bg-gray-200 border-b border-gray-400 font-bold">タスク</div>
-                                <div className="p-2 text-blue-700 font-normal">今日</div>
+                                <div className="p-2 text-gray-900 bg-gray-200 border-b border-gray-400 font-bold">タスク</div>
+                                <div className="pt-2 pl-2 pb-2 text-blue-700 font-normal text-sm">今日</div>
                                     { todayTasks.map((todayTask) =>
-                                        <div key = {todayTask.id} className="p-2">
+                                        <div key = {todayTask.id} className="pl-2 pb-2">
                                             <Link href={`/task/show/${todayTask.id}`}>{ todayTask.task_category.name }( {todayTask.campanyName} )</Link>
                                         </div>
                                     )}
-                                <div className="p-2 text-blue-700 font-normal">明日</div>
+                                <div className="pl-2 pb-2 text-blue-700 font-normal text-sm">明日</div>
                                     { tomorrowTasks.map((tomorrowTask) =>
-                                        <div key = {tomorrowTask.id} className="p-2">
+                                        <div key = {tomorrowTask.id} className="pl-2 pb-2">
                                             <Link href={`/task/show/${tomorrowTask.id}`}>{ tomorrowTask.task_category.name }( {tomorrowTask.campanyName} )</Link>
                                         </div>
                                     )}
-                                <div className="p-2 text-blue-700 font-normal">今週</div>
+                                <div className="pl-2 pb-2 text-blue-700 font-normal text-sm">今週</div>
                                     { weekTasks.map((weekTask) =>
-                                        <div key = {weekTask.id} className="p-2">
+                                        <div key = {weekTask.id} className="pl-2 pb-2">
                                             <Link href={`/task/show/${weekTask.id}`}>{ weekTask.task_category.name }( {weekTask.campanyName} )</Link>
                                         </div>
                                     )}
@@ -116,22 +139,22 @@ export default function Dashboard(props) {
                         
                         <div className="max-w-7xl mx-auto ">
                             <div className="bg-white overflow-hidden shadow-sm border border-gray-400">
-                                <div className="p-3 text-gray-900 bg-gray-200 border-b border-gray-400 font-bold">面接・面談</div>
-                                <div className="p-2 text-blue-700 font-normal">今日</div>
+                                <div className="p-2 text-gray-900 bg-gray-200 border-b border-gray-400 font-bold">面接・面談</div>
+                                <div className="pt-2 pl-2 pb-2 text-blue-700 font-normal text-sm">今日</div>
                                     { todayMeetings.map((todayMeeting) =>
-                                        <div key = {todayMeeting.id} className="p-2">
+                                        <div key = {todayMeeting.id} className="pl-2 pb-2">
                                             <Link href={`/meeting/show/${todayMeeting.id}`}>{ todayMeeting.meeting_category.name }( {todayMeeting.campanyName} )</Link>
                                         </div>
                                     )}
-                                <div className="p-2 text-blue-700 font-normal">明日</div>
+                                <div className="pl-2 pb-2 text-blue-700 font-normal text-sm">明日</div>
                                     { tomorrowMeetings.map((tomorrowMeeting) =>
-                                        <div key = {tomorrowMeeting.id} className="p-2">
+                                        <div key = {tomorrowMeeting.id} className="pl-2 pb-2">
                                             <Link href={`/meeting/show/${tomorrowMeeting.id}`}>{ tomorrowMeeting.meeting_category.name }( {tomorrowMeeting.campanyName} )</Link>
                                         </div>
                                     )}
-                                <div className="p-2 text-blue-700 font-normal">今週</div>
+                                <div className="pl-2 pb-2 text-blue-700 font-normal text-sm">今週</div>
                                     { weekMeetings.map((weekMeeting) =>
-                                        <div key = {weekMeeting.id} className="p-2">
+                                        <div key = {weekMeeting.id} className="pl-2 pb-2">
                                             <Link href={`/meeting/show/${weekMeeting.id}`}>{ weekMeeting.meeting_category.name }( {weekMeeting.campanyName} )</Link>
                                         </div>
                                     )}
