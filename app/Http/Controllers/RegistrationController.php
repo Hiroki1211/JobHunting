@@ -9,10 +9,11 @@ use App\Models\Registration;
 use App\Models\Campany;
 use App\Models\Meeting;
 use App\Models\Task;
+use App\Models\Campany_category;
 
 class RegistrationController extends Controller
 {
-    public function index(Registration $registrations, Campany $campanies, Meeting $meetings, Task $tasks){
+    public function index(Registration $registrations, Campany $campanies, Meeting $meetings, Task $tasks, Campany_category $campany_categories){
         $authID = Auth::user()->id;
         $campanyID = $registrations->campanyID($authID);
         $campanies = $campanies->whereIn('id', $campanyID)->get();
@@ -25,7 +26,9 @@ class RegistrationController extends Controller
         $tomorrowMeetings = $meetings->tomorrow($authID);
         $weekMeetings = $meetings->week($authID);
         
-        return Inertia::render('Dashboard', ["campanies" => $campanies->load('campany_category'), "todayTasks" => $todayTasks->load('task_category'), "tomorrowTasks" => $tomorrowTasks->load('task_category'), "weekTasks" => $weekTasks->load('task_category'), "todayMeetings" => $todayMeetings->load('meeting_category'), "tomorrowMeetings" => $tomorrowMeetings->load('meeting_category'), "weekMeetings" => $weekMeetings->load('meeting_category')]);
+        $campany_categories = $campany_categories->get();
+        
+        return Inertia::render('Dashboard', ["campanies" => $campanies->load('campany_category'), "todayTasks" => $todayTasks->load('task_category'), "tomorrowTasks" => $tomorrowTasks->load('task_category'), "weekTasks" => $weekTasks->load('task_category'), "todayMeetings" => $todayMeetings->load('meeting_category'), "tomorrowMeetings" => $tomorrowMeetings->load('meeting_category'), "weekMeetings" => $weekMeetings->load('meeting_category'), "campany_categories" => $campany_categories]);
     }
     
     public function campanyHome(Registration $registrations, Campany $campanies){
