@@ -6,7 +6,6 @@ export default function Dashboard(props) {
     const { campanies } = props;
     
     const colors = (props) => {
-        console.log(props);
         switch(props.campany_category.color){
             case 'red':
                 return(
@@ -66,7 +65,7 @@ export default function Dashboard(props) {
             header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Campany</h2>}
         >
             <Head title="Campany" />
-                <div className="p-4">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-end items-center gap-2">
                         <Link href="/campany/create">
                             <button>企業登録</button>
@@ -74,16 +73,18 @@ export default function Dashboard(props) {
                     </div>
                     { campanies.map((campany) =>
                         <div key={campany.id} className="p-3">
-                            <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                                <div className="p-6 text-gray-900">
-                                    <div>
-                                        <Link href={`/campany/${campany.id}`}>{ campany.name }</Link>
-                                    </div>
-                                    <div>
-                                        { colors(campany) }
+                            <Link href={`/campany/${campany.id}`}>
+                                <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg border border-gray-400">
+                                    <div className="p-6 text-gray-900">
+                                        <div>
+                                            { campany.name }
+                                        </div>
+                                        <div>
+                                            { colors(campany) }
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </Link>
                         </div>
                     )}
                 </div>

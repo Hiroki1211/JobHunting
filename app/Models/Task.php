@@ -28,22 +28,23 @@ class Task extends Model
     
     public function today(int $userID){
         $today = new DateTime();
-        $todayTask = $this->where('userID', '=', $userID)->where('state', '!=', 'finish')->whereDate('endDate', $today)->get();
+        $todayTask = $this->where('userID', '=', $userID)->whereDate('endDate', $today)->get();
         return $todayTask;
     }
     
     public function tomorrow(int $userID){
         $today = new DateTime();
         $tomorrow = $today->add(new DateInterval('P1D'));
-        $tomorrowTask = $this->where('userID', '=', $userID)->where('state', '!=', 'finish')->whereDate('endDate', $tomorrow)->get();
+        $tomorrowTask = $this->where('userID', '=', $userID)->whereDate('endDate', $tomorrow)->get();
         return $tomorrowTask;
     }
     
     public function week(int $userID){
-        $today = new Datetime();
+        $today = new DateTime();
         $tomorrow = $today->add(new DateInterval('P1D'));
-        $week = $today->add(new DateInterval('P7D'));
-        $weekTask = $this->where('userID', '=', $userID)->where('state', '!=', 'finish')->whereDate('endDate', '>', $tomorrow)->whereDate('endDate', '<=', $week)->orderBy('endDate', 'asc')->get();
+        $today2 = new DateTime();
+        $week = $today2->add(new DateInterval('P7D'));
+        $weekTask = $this->where('userID', '=', $userID)->whereDate('endDate', '>', $tomorrow)->whereDate('endDate', '<=', $week)->orderBy('endDate', 'asc')->get();
         return $weekTask;
     }
     
@@ -51,7 +52,19 @@ class Task extends Model
     public function after(int $userID){
         $today = new DateTime();
         $week = $today->add(new DateInterval('P7D'));
-        $afterTasks = $this->where('userID', '=', $userID)->where('state', '!=', 'finish')->whereDate('endDate', '>', $week)->orderBy('endDate', 'asc')->get();
+        $afterTasks = $this->where('userID', '=', $userID)->whereDate('endDate', '>', $week)->orderBy('endDate', 'asc')->get();
         return $afterTasks;
     }
+    
+    // カレンダー用
+    public function calendar(){
+        $array = [];
+        $tasks = $this->get();
+        foreach($tasks as $task){
+            array_push($array, ["title" => $task->task_category()->first()->name, "start" => $task->endDate, "end" => $task->endDate]);
+        }
+        
+        return $array;
+    }
+
 }

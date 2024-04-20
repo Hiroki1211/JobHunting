@@ -15,7 +15,7 @@ class CampanyController extends Controller
 {
     public function meetingTaskHome(Campany $campany, Meeting $meetings, Task $tasks){
         $meetings = $meetings->where('campanyID', '=', $campany->id)->with("meeting_category")->get();
-        $tasks = $tasks->where('campanyID', '=', $campany->id)->where('state', '!=', 'finish')->with("task_category")->get();
+        $tasks = $tasks->where('campanyID', '=', $campany->id)->with("task_category")->get();
         return Inertia::render('Manager/Campany/MeetingTask', ['meetings' => $meetings, 'campany' => $campany, 'tasks' => $tasks]);
     }
     

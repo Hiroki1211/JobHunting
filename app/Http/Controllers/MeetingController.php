@@ -62,4 +62,13 @@ class MeetingController extends Controller
         
         return redirect('/meeting/' . $campanyID);
     }
+    
+    public function calendar(Meeting $meeting, Task $task){
+        $meeting_array = $meeting->calendar();
+        $task_array = $task->calendar();
+        $event = [];
+        $event = array_merge($meeting_array, $task_array);
+        
+        return Inertia::render('Manager/Calendar/Home', ['events' => $event]);
+    }
 }

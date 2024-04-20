@@ -63,4 +63,21 @@ class TaskController extends Controller
         return redirect('/meeting/' . $campanyID);
     }
     
+    public function stateUpdate(Request $requests, Task $task){
+        $inputs = $requests->all();
+        foreach($inputs as $input){
+            $task = $task ->where('id', '=', $input['id'])->first();
+            $task->fill($input)->save();
+        }
+        return redirect('/dashboard');
+    }
+    
+    public function allStateUpdate(Request $requests, Task $task){
+        $inputs = $requests->all();
+        foreach($inputs as $input){
+            $task = $task ->where('id', '=', $input['id'])->first();
+            $task->fill($input)->save();
+        }
+        return redirect('/task');
+    }
 }

@@ -38,6 +38,9 @@ Route::middleware('auth')->group(function () {
     // home
     Route::get('/dashboard', [RegistrationController::class, "index"])->name('dashboard');
     
+    // calendar
+    Route::get('/calendar', [MeetingController::class, "calendar"])->name('calendar');
+    
     // campany
     Route::get('/campany', [RegistrationController::class, "campanyHome"])->name('campany');
     Route::get('/campany/create', [CampanyController::class, "create"]);
@@ -67,6 +70,8 @@ Route::middleware('auth')->group(function () {
     
     Route::post('/task/create', [TaskController::class, "store"]);
     Route::put('/task/edit/{task}', [TaskController::class, "update"]);
+    Route::put('/task/state', [TaskController::class, "stateUpdate"]);
+    Route::put('/task', [TaskController::class, "allStateUpdate"]);
     Route::delete('/task/delete/{task}', [TaskController::class, "delete"]);
 });
 

@@ -1,23 +1,138 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, router } from '@inertiajs/react';
 import Split from 'react-split';
-import {React, useState} from "react";
+import { v4 as uuid } from "uuid";
+import { React, useState} from "react";
+import Accordion from "@/Components/Accordion";
+
 
 export default function Dashboard(props) {
     const { campanies, todayTasks, tomorrowTasks, weekTasks, todayMeetings, tomorrowMeetings, weekMeetings, campany_categories } = props;
     
+    const [ todayTaskStates, setTodayTaskStates ] = useState(todayTasks);
+    const [ tomorrowTaskStates, setTomorrowTaskStates ] = useState(tomorrowTasks);
+    const [ weekTaskStates, setWeekTaskStates ] = useState(weekTasks);
+    
+    const mergeTasks = (todayTasks, tomorrowTasks, weekTasks) => {
+        var array = [];
+        array = todayTasks.concat(tomorrowTasks);
+        array = array.concat(weekTasks);
+        return array;
+    }
+    
+    const [ tasks, setTasks ] = useState(mergeTasks(todayTasks, tomorrowTasks, weekTasks));
+  
+    const countTaskState = (taskStates) => {
+        var count = 0;
+        taskStates.map((taskState) => {
+            if(taskState.state != 'finish'){
+                count += 1;
+            }
+        });
+        return count;
+    }  
+    
+    const [ todayTaskCount, setTodayTaskCount ] = useState(countTaskState(todayTaskStates));
+    const [ tomorrowTaskCount, setTomorrowTaskCount ] = useState(countTaskState(tomorrowTaskStates));
+    const [ weekTaskCount, setWeekTaskCount ] = useState(countTaskState(weekTaskStates));
+    
     const [ showCampanies, setShowCampanies ] = useState(campanies);
     
+    // 企業のカテゴリ絞り込み
     const selectCampanyCategory = (props) => {
         if(props == "all"){
             setShowCampanies(campanies);
         }else{
-            console.log(props);
             const selectedCampanies = campanies.filter( (campany) => campany.campany_category_id == props );
             setShowCampanies(selectedCampanies)
         }
     }
     
+    const changeTaskState = (id, taskStates, setTaskStates) => {
+        const newTasks = taskStates;
+        const task = newTasks.find((task) => task.id === id )
+        if(task.state == "unfinished"){
+            task.state = "check";
+        }else{
+            task.state = "unfinished";
+        }
+        setTaskStates(newTasks);
+    }    
+    
+    const displayTitle = (title, countState) => {
+        return(
+            <div className="pt-2 pb-2 text-blue-700 font-normal text-sm">
+                {title}({countState})
+            </div>
+        )
+    }
+    
+    const displayTask = (taskState, taskStates, setTaskStates) => {
+        if(taskState.state != 'finish'){
+            return(
+                <div className="pl-2 pb-2 items-center flex">
+                    <input 
+                        type="checkbox"
+                        onChange={(e) => changeTaskState(taskState.id, taskStates, setTaskStates)}
+                    ></input>
+                    <div class="pl-2">
+                        <Link href={`/task/show/${taskState.id}`}>
+                            { taskState.task_category.name }( {taskState.campanyName} )
+                        </Link>
+                    </div>
+                </div>
+            );
+        }        
+    }
+    
+    const displayTasks = (taskStates, setTaskStates) => {
+        return(
+            <div>
+                <div>
+                    {taskStates.map((taskState) => (
+                        <div key = {taskState.id}>
+                            { displayTask(taskState, taskStates, setTaskStates) }
+                        </div>
+                    ))}
+                </div>
+            </div>
+         )
+    }
+    
+    const checkFinishTaskState = (id, taskStates, setTaskStates) => {
+        const newTasks = taskStates;
+        const task = newTasks.find((task) => task.id === id )
+        if(task.state == "check"){
+            task.state = "finish";
+        }
+        setTaskStates(newTasks);
+    }    
+    
+    const handleSendTask = (e) => {
+        const taskArrays = [];
+        todayTaskStates.map((todayTaskState) => {
+            taskArrays.push(todayTaskState);
+            checkFinishTaskState(todayTaskState.id, todayTaskStates, setTodayTaskStates);
+        });
+        tomorrowTaskStates.map((tomorrowTaskState) => {
+            taskArrays.push(tomorrowTaskState);
+            checkFinishTaskState(tomorrowTaskState.id, tomorrowTaskStates, setTomorrowTaskStates);
+        });        
+        weekTaskStates.map((weekTaskState) => {
+            taskArrays.push(weekTaskState);
+            checkFinishTaskState(weekTaskState.id, weekTaskStates, setWeekTaskStates);
+        });
+        
+        setTasks(taskArrays);
+        setTodayTaskCount(countTaskState(todayTaskStates));
+        setTomorrowTaskCount(countTaskState(tomorrowTaskStates));
+        setWeekTaskCount(countTaskState(weekTaskStates));
+        
+        e.preventDefault();
+        router.put('/task/state', tasks);
+    }
+
+    // 企業のカテゴリの色
     const colors = (props) => {
         switch(props.campany_category.color){
             case 'red':
@@ -78,7 +193,7 @@ export default function Dashboard(props) {
             header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Home</h2>}
         >
             <Head title="Home" />
-            
+
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-5">
                     <div className="col-span-3">
@@ -95,47 +210,61 @@ export default function Dashboard(props) {
                                 </select>
                             </div>
                         </div>
+                        
                         { showCampanies.map((campany) =>
-                            <div key = {campany.id} className="p-3">
-                                <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg border border-gray-400">
-                                    <div className="p-6 text-gray-900 font-normal">
-                                        <div>
-                                            <Link href={`/campany/${campany.id}`}>{ campany.name }</Link>
-                                        </div>
-                                        <div>
-                                            { colors(campany) }
+                            <div key = {campany.id} className="p-2">
+                                <Link href={`/campany/${campany.id}`}>
+                                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg border border-gray-400">
+                                        <div className="p-6 text-gray-900 font-normal">
+                                            <div>
+                                                { campany.name }
+                                            </div>
+                                            <div>
+                                                { colors(campany) }
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </Link>
                             </div>
                         )}
                     </div>
                     
                     
                     <div className='p-2 col-span-2'>
-                        <div className="max-w-7xl mx-auto pb-3">
-                            <div className="bg-white overflow-hidden shadow-sm border border-gray-400">
-                                <div className="p-2 text-gray-900 bg-gray-200 border-b border-gray-400 font-bold">タスク</div>
-                                <div className="pt-2 pl-2 pb-2 text-blue-700 font-normal text-sm">今日</div>
-                                    { todayTasks.map((todayTask) =>
-                                        <div key = {todayTask.id} className="pl-2 pb-2">
-                                            <Link href={`/task/show/${todayTask.id}`}>{ todayTask.task_category.name }( {todayTask.campanyName} )</Link>
+                        <form onSubmit={handleSendTask}>
+                            <div className="max-w-7xl mx-auto pb-3">
+                                <div className="bg-white overflow-hidden shadow-sm border border-gray-400">
+                                    <div className="text-gray-900 bg-gray-200 border-b border-gray-400 font-bold flex justify-between items-center p-2">
+                                        <div>    
+                                            タスク
                                         </div>
-                                    )}
-                                <div className="pl-2 pb-2 text-blue-700 font-normal text-sm">明日</div>
-                                    { tomorrowTasks.map((tomorrowTask) =>
-                                        <div key = {tomorrowTask.id} className="pl-2 pb-2">
-                                            <Link href={`/task/show/${tomorrowTask.id}`}>{ tomorrowTask.task_category.name }( {tomorrowTask.campanyName} )</Link>
+                                        <div>
+                                            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-xs px-3 py-1 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                                更新
+                                            </button>
                                         </div>
-                                    )}
-                                <div className="pl-2 pb-2 text-blue-700 font-normal text-sm">今週</div>
-                                    { weekTasks.map((weekTask) =>
-                                        <div key = {weekTask.id} className="pl-2 pb-2">
-                                            <Link href={`/task/show/${weekTask.id}`}>{ weekTask.task_category.name }( {weekTask.campanyName} )</Link>
-                                        </div>
-                                    )}
+                                    </div>
+                                    <Accordion 
+                                        check={true}
+                                        title={displayTitle("今日", todayTaskCount)}
+                                    >
+                                        {displayTasks(todayTaskStates, setTodayTaskStates)}
+                                    </Accordion>
+                                    <Accordion 
+                                        check={false}
+                                        title={displayTitle("明日", tomorrowTaskCount)}
+                                    >
+                                        {displayTasks(tomorrowTaskStates, setTomorrowTaskStates)}
+                                    </Accordion>
+                                    <Accordion 
+                                        check={false}
+                                        title={displayTitle("今週", weekTaskCount)}
+                                    >
+                                        {displayTasks(weekTaskStates, setWeekTaskStates)}
+                                    </Accordion>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                         
                         <div className="max-w-7xl mx-auto ">
                             <div className="bg-white overflow-hidden shadow-sm border border-gray-400">

@@ -21,8 +21,8 @@ return new class extends Migration
             $table->bigInteger('campanyID')->unsigned();
             $table->string('campanyName', 50);
             $table->dateTime('endDate');
-            $table->text('memo');
-            $table->string('state', 50); // unfinished, working, finish
+            $table->text('memo')->nullable();
+            $table->string('state', 50); // unfinished, finish
         });
     }
 
