@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('campanyName', 50);
             $table->dateTime('startDate');
             $table->dateTime('endDate');
-            $table->text('memo');
+            $table->text('memo')->nullable();
             $table->text('location');
             $table->string('cloth', 50);
             $table->timestamps();

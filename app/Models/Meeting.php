@@ -61,4 +61,15 @@ class Meeting extends Model
         $aftermeetings = $this->where('userID', '=', $userID)->whereDate('startDate', '>', $week)->orderBy('startDate', 'asc')->get();
         return $aftermeetings;
     }
+    
+    // カレンダー用
+    public function calendar(){
+        $array = [];
+        $meetings = $this->get();
+        foreach($meetings as $meeting){
+            array_push($array, ["title" => $meeting->meeting_category()->first()->name, "start" => $meeting->startDate, "end" => $meeting->endDate]);
+        }
+        
+        return $array;
+    }
 }

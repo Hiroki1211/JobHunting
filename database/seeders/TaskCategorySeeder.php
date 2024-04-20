@@ -35,6 +35,12 @@ class TaskCategorySeeder extends Seeder
         ]);
         
          DB::table('task_categories')->insert([
+            'name' => '内定承諾',
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTIme(),
+        ]); 
+        
+         DB::table('task_categories')->insert([
             'name' => 'その他',
             'created_at' => new DateTime(),
             'updated_at' => new DateTIme(),

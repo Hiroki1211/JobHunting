@@ -42,6 +42,12 @@ export default function Authenticated({ auth, header, children }) {
                                 <NavLink href={"/task"} active={route().current('/task')}>
                                     Task
                                 </NavLink>
+                            </div>
+                            
+                            <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex text-white">
+                                <NavLink href={"/calendar"} active={route().current('/calendar')}>
+                                    Calendar
+                                </NavLink>
                             </div> 
                         </div>
 
