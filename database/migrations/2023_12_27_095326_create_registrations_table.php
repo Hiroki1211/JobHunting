@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('userID')->unsigned();
             $table->bigInteger('registrateUserID')->unsigned();
-            $table->bigInteger('campanyID')->unsigned();
+            $table->bigInteger('companyID')->unsigned();
             $table->timestamps();
         });
     }

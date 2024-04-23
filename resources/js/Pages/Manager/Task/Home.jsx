@@ -52,6 +52,7 @@ export default function Dashboard(props) {
                 count += 1;
             }
         });
+
         return count;
     }  
     
@@ -107,6 +108,7 @@ export default function Dashboard(props) {
     }
     
     const handleSendTask = (e) => {
+        
         const taskArrays = [];
         todayTaskStates.map((todayTaskState) => {
             checkFinishTaskState(todayTaskState, todayTaskStates, setTodayTaskStates)
@@ -126,10 +128,11 @@ export default function Dashboard(props) {
         });
         setTaskStates(taskArrays);
         
-        setTodayTaskCount(countTaskState(todayTaskStates));
-        setTomorrowTaskCount(countTaskState(tomorrowTaskStates));
-        setWeekTaskCount(countTaskState(weekTaskStates));
-        setAfterTaskCount(countTaskState(afterTaskStates));
+        setTodayTaskCount(countTaskState(todayTaskStates, "unfinished"));
+        setTomorrowTaskCount(countTaskState(tomorrowTaskStates, "unfinished"));
+        setWeekTaskCount(countTaskState(weekTaskStates, "unfinished"));
+        setAfterTaskCount(countTaskState(afterTaskStates, "unfinished"));
+
         
         setTodayDisplayTaskStates(sqeezeTaskStates(todayTaskStates, displayState));
         setTomorrowDisplayTaskStates(sqeezeTaskStates(tomorrowTaskStates, displayState));
@@ -151,6 +154,7 @@ export default function Dashboard(props) {
                                 <th scope="col" class="px-6 py-2">タスク名</th>
                                 <th scope="col" class="px-6 py-2">企業名</th>
                                 <th scope="col" class="px-6 py-2">締切</th>
+                                <th scope="col" class="px-6 py-2"></th>
                             </tr>
                         </thead>
                         <tbody class="text-gray-900">
@@ -160,8 +164,15 @@ export default function Dashboard(props) {
                                             { selectTaskState(taskState, taskStates, setTaskStates) }
                                         </td>
                                         <td class="px-6 py-2 text-left text-gray-900 dark:text-white">{ taskState.task_category.name }</td>
-                                        <td class="px-6 py-2 text-left text-gray-900 dark:text-white">{ taskState.campanyName }</td>
+                                        <td class="px-6 py-2 text-left text-gray-900 dark:text-white">{ taskState.companyName }</td>
                                         <td class="px-6 py-2 text-left text-gray-900 dark:text-white">{ taskState.endDate }</td>
+                                        <td class="px-6 py-2 text-left text-gray-900 dark:text-white">
+                                            <Link href={`/task/show/${taskState.id}`}>
+                                                <div class="text-blue-700">
+                                                    詳細
+                                                </div>
+                                            </Link>
+                                        </td>
                                     </tr>
                             )}
                         </tbody>
@@ -241,7 +252,6 @@ export default function Dashboard(props) {
                             </button>
                         </div>
 
-                        
                         <div class="p-2">
                             { taskTable(displayTitle("今日", todayTaskCount), todayTaskStates, setTodayTaskStates, true, todayTaskCount, todayDisplayTaskStates) }
                             { taskTable(displayTitle("明日", tomorrowTaskCount), tomorrowTaskStates, setTomorrowTaskStates, false, tomorrowTaskCount, tomorrowDisplayTaskStates) }

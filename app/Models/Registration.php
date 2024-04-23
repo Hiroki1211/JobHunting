@@ -12,19 +12,19 @@ class Registration extends Model
     protected $fillable = [
         'userID',
         'registrateUserID',
-        'campanyID',
+        'companyID',
     ];   
     
     public function registration(int $userID){
         return $this->where('userID', '=', $userID)->get();
     }
     
-    public function campanyID(int $userID){
+    public function companyID(int $userID){
         $registrationID = array();
         $registrations = $this->where('userID', '=', $userID)->get();
         foreach($registrations as $registration){
             if($registration->userID === $userID){
-                $registrationID[] = $registration->campanyID;
+                $registrationID[] = $registration->companyID;
             }
         }
         

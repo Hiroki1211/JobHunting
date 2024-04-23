@@ -19,7 +19,7 @@ export default function Dashboard(props) {
                             <div key={todayMeeting.id} className="p-3">
                                 <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                                     <div className="p-6 text-gray-900">
-                                        { todayMeeting.meeting_category.name }( { todayMeeting.campanyName } )
+                                        { todayMeeting.meeting_category.name }( { todayMeeting.companyName } )
                                     </div>
                                 </div>
                             </div>
@@ -31,7 +31,7 @@ export default function Dashboard(props) {
                             <div key={tomorrowMeeting.id} className="p-3">
                                 <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                                     <div className="p-6 text-gray-900">
-                                        { tomorrowMeeting.meeting_category.name }( { tomorrowMeeting.campanyName } )
+                                        { tomorrowMeeting.meeting_category.name }( { tomorrowMeeting.companyName } )
                                     </div>
                                 </div>
                             </div>
@@ -43,7 +43,7 @@ export default function Dashboard(props) {
                             <div key={weekMeeting.id} className="p-3">
                                 <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                                     <div className="p-6 text-gray-900">
-                                        { weekMeeting.meeting_category.name }( { weekMeeting.campanyName } )
+                                        { weekMeeting.meeting_category.name }( { weekMeeting.companyName } )
                                     </div>
                                 </div>
                             </div>
@@ -55,7 +55,7 @@ export default function Dashboard(props) {
                             <div key={afterMeeting.id} className="p-3">
                                 <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                                     <div className="p-6 text-gray-900">
-                                        { afterMeeting.meeting_category.name }( { afterMeeting.campanyName } )
+                                        { afterMeeting.meeting_category.name }( { afterMeeting.companyName } )
                                     </div>
                                 </div>
                             </div>

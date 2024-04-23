@@ -7,7 +7,7 @@ import Accordion from "@/Components/Accordion";
 
 
 export default function Dashboard(props) {
-    const { campanies, todayTasks, tomorrowTasks, weekTasks, todayMeetings, tomorrowMeetings, weekMeetings, campany_categories } = props;
+    const { companies, todayTasks, tomorrowTasks, weekTasks, todayMeetings, tomorrowMeetings, weekMeetings, company_categories } = props;
     
     const [ todayTaskStates, setTodayTaskStates ] = useState(todayTasks);
     const [ tomorrowTaskStates, setTomorrowTaskStates ] = useState(tomorrowTasks);
@@ -36,15 +36,15 @@ export default function Dashboard(props) {
     const [ tomorrowTaskCount, setTomorrowTaskCount ] = useState(countTaskState(tomorrowTaskStates));
     const [ weekTaskCount, setWeekTaskCount ] = useState(countTaskState(weekTaskStates));
     
-    const [ showCampanies, setShowCampanies ] = useState(campanies);
+    const [ showcompanies, setShowcompanies ] = useState(companies);
     
     // 企業のカテゴリ絞り込み
-    const selectCampanyCategory = (props) => {
+    const selectCompanyCategory = (props) => {
         if(props == "all"){
-            setShowCampanies(campanies);
+            setShowcompanies(companies);
         }else{
-            const selectedCampanies = campanies.filter( (campany) => campany.campany_category_id == props );
-            setShowCampanies(selectedCampanies)
+            const selectedcompanies = companies.filter( (company) => company.company_category_id == props );
+            setShowcompanies(selectedcompanies)
         }
     }
     
@@ -77,7 +77,7 @@ export default function Dashboard(props) {
                     ></input>
                     <div class="pl-2">
                         <Link href={`/task/show/${taskState.id}`}>
-                            { taskState.task_category.name }( {taskState.campanyName} )
+                            { taskState.task_category.name }( {taskState.companyName} )
                         </Link>
                     </div>
                 </div>
@@ -134,53 +134,53 @@ export default function Dashboard(props) {
 
     // 企業のカテゴリの色
     const colors = (props) => {
-        switch(props.campany_category.color){
+        switch(props.company_category.color){
             case 'red':
                 return(
                     <span class = "bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-red-400 border border-red-400">
-                        { props.campany_category.name }
+                        { props.company_category.name }
                     </span>
                 ) 
             case 'orange':
                 return(
                     <span class = "bg-orange-100 text-orange-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-orange-400 border border-orange-400">
-                        { props.campany_category.name }
+                        { props.company_category.name }
                     </span>
                 )                 
             case 'yellow':
                  return(
                     <span class = "bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-yellow-400 border border-yellow-400">
-                        { props.campany_category.name }
+                        { props.company_category.name }
                     </span>
                 )                
             case 'lightGreen':
                 return(
                     <span class = "bg-lime-100 text-lime-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-lime-400 border border-lime-400">
-                        { props.campany_category.name }
+                        { props.company_category.name }
                     </span>
                 )                 
             case 'green' :
                 return(
                     <span class = "bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">
-                        { props.campany_category.name }
+                        { props.company_category.name }
                     </span>
                 )                
             case 'lightBlue' :
                 return(
                     <span class = "bg-sky-100 text-sky-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-sky-400 border border-sky-400">
-                        { props.campany_category.name }
+                        { props.company_category.name }
                     </span>
                 )                 
             case 'blue' :
                 return(
                     <span class = "bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400">
-                        { props.campany_category.name }
+                        { props.company_category.name }
                     </span>
                 )                 
             case 'purple' :
                 return(
                     <span class = "bg-purple-100 text-purple-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-purple-400 border border-purple-400">
-                        { props.campany_category.name }
+                        { props.company_category.name }
                     </span>
                 ) 
         }
@@ -202,25 +202,25 @@ export default function Dashboard(props) {
                                 企業一覧
                             </div>
                             <div class="pl-2">
-                                <select onChange={ (e) => selectCampanyCategory(e.target.value) }>
+                                <select onChange={ (e) => selectCompanyCategory(e.target.value) }>
                                     <option value="all">All</option>
-                                    { campany_categories.map((campany_category) =>
-                                        <option value = { campany_category.id } key = {campany_category.id}>{ campany_category.name }</option>
+                                    { company_categories.map((company_category) =>
+                                        <option value = { company_category.id } key = {company_category.id}>{ company_category.name }</option>
                                     )}
                                 </select>
                             </div>
                         </div>
                         
-                        { showCampanies.map((campany) =>
-                            <div key = {campany.id} className="p-2">
-                                <Link href={`/campany/${campany.id}`}>
+                        { showcompanies.map((company) =>
+                            <div key = {company.id} className="p-2">
+                                <Link href={`/company/${company.id}`}>
                                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg border border-gray-400">
                                         <div className="p-6 text-gray-900 font-normal">
                                             <div>
-                                                { campany.name }
+                                                { company.name }
                                             </div>
                                             <div>
-                                                { colors(campany) }
+                                                { colors(company) }
                                             </div>
                                         </div>
                                     </div>
@@ -272,19 +272,19 @@ export default function Dashboard(props) {
                                 <div className="pt-2 pl-2 pb-2 text-blue-700 font-normal text-sm">今日</div>
                                     { todayMeetings.map((todayMeeting) =>
                                         <div key = {todayMeeting.id} className="pl-2 pb-2">
-                                            <Link href={`/meeting/show/${todayMeeting.id}`}>{ todayMeeting.meeting_category.name }( {todayMeeting.campanyName} )</Link>
+                                            <Link href={`/meeting/show/${todayMeeting.id}`}>{ todayMeeting.meeting_category.name }( {todayMeeting.companyName} )</Link>
                                         </div>
                                     )}
                                 <div className="pl-2 pb-2 text-blue-700 font-normal text-sm">明日</div>
                                     { tomorrowMeetings.map((tomorrowMeeting) =>
                                         <div key = {tomorrowMeeting.id} className="pl-2 pb-2">
-                                            <Link href={`/meeting/show/${tomorrowMeeting.id}`}>{ tomorrowMeeting.meeting_category.name }( {tomorrowMeeting.campanyName} )</Link>
+                                            <Link href={`/meeting/show/${tomorrowMeeting.id}`}>{ tomorrowMeeting.meeting_category.name }( {tomorrowMeeting.companyName} )</Link>
                                         </div>
                                     )}
                                 <div className="pl-2 pb-2 text-blue-700 font-normal text-sm">今週</div>
                                     { weekMeetings.map((weekMeeting) =>
                                         <div key = {weekMeeting.id} className="pl-2 pb-2">
-                                            <Link href={`/meeting/show/${weekMeeting.id}`}>{ weekMeeting.meeting_category.name }( {weekMeeting.campanyName} )</Link>
+                                            <Link href={`/meeting/show/${weekMeeting.id}`}>{ weekMeeting.meeting_category.name }( {weekMeeting.companyName} )</Link>
                                         </div>
                                     )}
                             </div>

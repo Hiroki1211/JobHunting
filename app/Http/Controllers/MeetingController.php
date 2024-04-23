@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
-use App\Models\Campany;
+use App\Models\Company;
 use App\Models\Meeting;
 use App\Models\Meeting_category;
 use App\Models\Task;
@@ -24,11 +24,11 @@ class MeetingController extends Controller
         return Inertia::render('Manager/Meeting/Home', ['todayMeetings' => $todayMeetings->load('meeting_category'), 'tomorrowMeetings' => $tomorrowMeetings->load('meeting_category'), 'weekMeetings' => $weekMeetings->load('meeting_category'), 'afterMeetings' => $afterMeetings->load('meeting_category')]);
     }
     
-    public function create(Campany $campany, Meeting_category $meetingCategories){
-        return Inertia::render('Manager/Meeting/Create', ['campany' => $campany, 'meetingCategories' => $meetingCategories->get()]);
+    public function create(Company $company, Meeting_category $meetingCategories){
+        return Inertia::render('Manager/Meeting/Create', ['company' => $company, 'meetingCategories' => $meetingCategories->get()]);
     }
     
-    public function store(Request $request, Campany $campany, Meeting $meeting){
+    public function store(Request $request, Company $company, Meeting $meeting){
         $authID = Auth::user()->id;
         
         $input = $request->all();
@@ -37,30 +37,30 @@ class MeetingController extends Controller
         $meeting->registrateUserID = $authID;
         $meeting->save();
 
-        return redirect('/meeting/' . $meeting->campanyID);
+        return redirect('/meeting/' . $meeting->companyID);
     }
     
     public function show(Meeting $meeting){
         return Inertia::render('Manager/Meeting/Show', ['meeting' => $meeting->load('meeting_category')]);
     }
     
-    public function edit(Meeting $meeting, Campany $campany, Meeting_category $meetingCategories){
-        $campany = $campany->where("id", "=", $meeting->campanyID)->first();
+    public function edit(Meeting $meeting, Company $company, Meeting_category $meetingCategories){
+        $company = $company->where("id", "=", $meeting->companyID)->first();
         
-        return Inertia::render('Manager/Meeting/Edit', ['meeting' => $meeting, 'campany' => $campany, 'meetingCategories' => $meetingCategories->get()]);
+        return Inertia::render('Manager/Meeting/Edit', ['meeting' => $meeting, 'company' => $company, 'meetingCategories' => $meetingCategories->get()]);
     }
     
     public function update(Meeting $meeting, Request $request){
         $input = $request->all();
         $meeting->fill($input)->save();
-        return redirect('/meeting/' . $meeting->campanyID);
+        return redirect('/meeting/' . $meeting->companyID);
     }
     
     public function delete(Meeting $meeting){
-        $campanyID = $meeting->campanyID;
+        $companyID = $meeting->companyID;
         $meeting -> delete();
         
-        return redirect('/meeting/' . $campanyID);
+        return redirect('/meeting/' . $companyID);
     }
     
     public function calendar(Meeting $meeting, Task $task){
