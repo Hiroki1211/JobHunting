@@ -14,8 +14,8 @@ class Task extends Model
     protected $fillable = [
         'userID',
         'registrateUserID',
-        'campanyID',
-        'campanyName',
+        'companyID',
+        'companyName',
         'endDate',
         'memo',
         'state',

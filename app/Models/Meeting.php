@@ -16,8 +16,8 @@ class Meeting extends Model
     protected $fillable = [
         'userID',
         'registrateUserID',
-        'campanyID',
-        'campanyName',
+        'companyID',
+        'companyName',
         'startDate',
         'endDate',
         'memo',

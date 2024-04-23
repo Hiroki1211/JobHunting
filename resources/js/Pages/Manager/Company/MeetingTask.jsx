@@ -3,7 +3,7 @@ import { Head, Link } from '@inertiajs/react';
 import React from "react";
 
 export default function Dashboard(props) {
-    const { meetings, campany, tasks } = props;
+    const { meetings, company, tasks } = props;
     
     console.log(tasks);
     
@@ -19,7 +19,7 @@ export default function Dashboard(props) {
                     <div className="grid grid-cols-2">
                         <div className="p-4">
                             <div className="p-2">
-                                <Link href={`/meeting/create/${campany.id}`}>
+                                <Link href={`/meeting/create/${company.id}`}>
                                     <button>面接登録</button>
                                 </Link>
                             </div>
@@ -36,7 +36,7 @@ export default function Dashboard(props) {
                         <div>
                             <div className="p-4">
                                 <div className="p-2">
-                                    <Link href={`/task/create/${campany.id}`}>
+                                    <Link href={`/task/create/${company.id}`}>
                                         <button>タスク登録</button>
                                     </Link>
                                 </div>

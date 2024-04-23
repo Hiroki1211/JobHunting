@@ -13,8 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('campanies', function (Blueprint $table) {
-            $table->foreignId('campany_category_id')->constrained("campany_categories");
+        Schema::create('company_categories', function (Blueprint $table) {
+            $table->id();
+            $table->string('name', 100);
+            $table->string('color', 100);
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('campanies', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('company_categories');
     }
 };

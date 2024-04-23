@@ -6,13 +6,13 @@ import Select from "react-select";
 
 export default function Dashboard(props) {
     
-    const { campany, meetingCategories } = props;
+    const { company, meetingCategories } = props;
     
     const {data, setData, post} = useForm({
         userID : "",
         registrateUserID : "",
-        campanyID : campany.id,
-        campanyName : campany.name,
+        companyID : company.id,
+        companyName : company.name,
         startDate : "",
         endDate : "",
         memo : "",

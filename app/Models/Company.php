@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Campany extends Model
+class Company extends Model
 {
     use HasFactory;
     
@@ -26,10 +26,10 @@ class Campany extends Model
         'fixOverTime',
         'fixOverTimeHour',
         'fixOverTimePayment',
-        'campany_category_id',
+        'company_category_id',
     ];
     
-    public function campany_category(){
-        return $this->belongsTo(Campany_category::class);
+    public function company_category(){
+        return $this->belongsTo(Company_category::class);
     }
 }

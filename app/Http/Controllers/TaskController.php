@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
-use App\Models\Campany;
+use App\Models\Company;
 use App\Models\Task;
 use App\Models\Task_category;
 
@@ -23,12 +23,12 @@ class TaskController extends Controller
         return Inertia::render('Manager/Task/Home', ['todayTasks' => $todayTasks->load('task_category'), 'tomorrowTasks' => $tomorrowTasks->load('task_category'), 'weekTasks' => $weekTasks->load('task_category'), 'afterTasks' => $afterTasks->load('task_category')]);
     }
     
-    public function create(Campany $campany, Task_category $taskCategories){
+    public function create(Company $company, Task_category $taskCategories){
 
-        return Inertia::render('Manager/Task/Create', ['campany' => $campany, 'taskCategories' => $taskCategories->get()]);
+        return Inertia::render('Manager/Task/Create', ['company' => $company, 'taskCategories' => $taskCategories->get()]);
     }
     
-    public function store(Request $request, Campany $campany, Task $task){
+    public function store(Request $request, Company $company, Task $task){
         $authID = Auth::user()->id;
         
         $input = $request->all();
@@ -37,30 +37,30 @@ class TaskController extends Controller
         $task->registrateUserID = $authID;
         $task->save();
 
-        return redirect('/meeting/' . $task->campanyID);
+        return redirect('/meeting/' . $task->companyID);
     }
     
     public function show(Task $task){
         return Inertia::render('Manager/Task/Show', ['task' => $task->load('task_category')]);
     }
     
-    public function edit(Task $task, Campany $campany, Task_category $taskCategories){
-        $campany = $campany->where("id", "=", $task->campanyID)->first();
+    public function edit(Task $task, Company $company, Task_category $taskCategories){
+        $company = $company->where("id", "=", $task->companyID)->first();
         
-        return Inertia::render('Manager/Task/Edit', ['task' => $task, 'campany' => $campany, 'taskCategories' => $taskCategories->get()]);
+        return Inertia::render('Manager/Task/Edit', ['task' => $task, 'company' => $company, 'taskCategories' => $taskCategories->get()]);
     }
     
     public function update(Task $task, Request $request){
         $input = $request->all();
         $task->fill($input)->save();
-        return redirect('/meeting/' . $task->campanyID);
+        return redirect('/meeting/' . $task->companyID);
     }
     
     public function delete(Task $task){
-        $campanyID = $task->campanyID;
+        $companyID = $task->companyID;
         $task -> delete();
         
-        return redirect('/meeting/' . $campanyID);
+        return redirect('/meeting/' . $companyID);
     }
     
     public function stateUpdate(Request $requests, Task $task){

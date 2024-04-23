@@ -7,7 +7,7 @@ export default function Dashboard(props) {
     
     const { task } = props;
     
-    const handleDeleteCampany = (id) => {
+    const handleDeletecompany = (id) => {
         router.delete(`/task/delete/${id}`, {
             onBefore: () => confirm("本当に削除しますか？"),
         })
@@ -64,7 +64,7 @@ export default function Dashboard(props) {
                 <div className="p-3">
                     <div className="flex justify-start items-center gap-2">
                         <Link href={`/task/edit/${task.id}`}>編集</Link>
-                        <button onClick={() => handleDeleteCampany(task.id)}>削除</button>
+                        <button onClick={() => handleDeletecompany(task.id)}>削除</button>
                     </div>
                 </div>
             </div>

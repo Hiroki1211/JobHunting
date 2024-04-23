@@ -7,7 +7,7 @@ export default function Dashboard(props) {
     
     const { meeting } = props;
     
-    const handleDeleteCampany = (id) => {
+    const handleDeletecompany = (id) => {
         router.delete(`/meeting/delete/${id}`, {
             onBefore: () => confirm("本当に削除しますか？"),
         })
@@ -89,7 +89,7 @@ export default function Dashboard(props) {
                 <div className="p-3">
                     <div className="flex justify-start items-center gap-2">
                         <Link href={`/meeting/edit/${meeting.id}`}>編集</Link>
-                        <button onClick={() => handleDeleteCampany(meeting.id)}>削除</button>
+                        <button onClick={() => handleDeletecompany(meeting.id)}>削除</button>
                     </div>
                 </div>
             </div>

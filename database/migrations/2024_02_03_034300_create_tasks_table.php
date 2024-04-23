@@ -18,8 +18,8 @@ return new class extends Migration
             $table->timestamps();
             $table->bigInteger('userID')->unsigned();
             $table->bigInteger('registrateUserID')->unsigned();
-            $table->bigInteger('campanyID')->unsigned();
-            $table->string('campanyName', 50);
+            $table->bigInteger('companyID')->unsigned();
+            $table->string('companyName', 50);
             $table->dateTime('endDate');
             $table->text('memo')->nullable();
             $table->string('state', 50); // unfinished, finish
